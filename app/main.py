@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from app.database import Base, engine
 from app.routers import books, cart, favorites, orders, reviews, users
@@ -26,6 +28,10 @@ app.include_router(cart.router)
 app.include_router(orders.router)
 app.include_router(reviews.router)
 
+frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
+if frontend_dir.exists():
+    app.mount("/app", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+
 
 @app.get("/", summary="系统概览")
 def root() -> dict[str, object]:
@@ -49,4 +55,5 @@ def root() -> dict[str, object]:
             "交易完成后评价",
         ],
         "docs": "/docs",
+        "frontend": "/app/",
     }

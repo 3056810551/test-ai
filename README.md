@@ -28,6 +28,7 @@
 - 数据库：SQLite
 - ORM：SQLAlchemy 2.x
 - API 文档：Swagger UI (`/docs`)
+- 前端：原生 `HTML + CSS + JavaScript`，样式使用 `Tailwind CSS CDN`
 
 ## 运行方式
 
@@ -44,6 +45,18 @@ uvicorn app.main:app --reload
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 .venv\Scripts\python.exe -m uvicorn app.main:app --reload
 ```
+
+启动后除了 Swagger 文档，也可以直接打开前端页面：
+
+```text
+http://127.0.0.1:8000/app/
+```
+
+说明：
+
+- 前端静态页面已经挂载到 FastAPI 内，不需要额外起前端服务
+- 前端通过同域方式直接调用后端 API，因此不需要单独处理跨域
+- 当前 Tailwind 使用 CDN 方式加载，适合课程演示和快速联调
 
 说明：本项目使用的是 Python 内置的 SQLite 驱动配合 SQLAlchemy 访问 `SQLite` 数据库，因此即使你系统里有单独的 `sqlite3.exe`，也不需要额外改配置。
 
