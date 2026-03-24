@@ -33,7 +33,7 @@
 
 ```bash
 python -m venv .venv
-source .venv/Scripts/activate
+.venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
@@ -46,6 +46,40 @@ uvicorn app.main:app --reload
 ```
 
 说明：本项目使用的是 Python 内置的 SQLite 驱动配合 SQLAlchemy 访问 `SQLite` 数据库，因此即使你系统里有单独的 `sqlite3.exe`，也不需要额外改配置。
+
+如果需要切换到别的数据库文件进行测试，可以通过环境变量覆盖默认数据库地址：
+
+```bash
+set DATABASE_URL=sqlite:///./demo_seed.db
+```
+
+## 初始化测试数据
+
+项目附带了一份完整种子数据脚本，覆盖学生账号、图书、收藏、购物车、订单与评价，方便直接演示完整业务闭环。
+
+安全初始化（数据库必须为空）：
+
+```bash
+.venv\Scripts\python.exe scripts\seed_data.py
+```
+
+重置并重新生成演示数据：
+
+```bash
+.venv\Scripts\python.exe scripts\seed_data.py --reset
+```
+
+默认演示账号统一密码为：
+
+```text
+123456
+```
+
+推荐账号：
+
+- 张书铭：`20260001`，适合演示卖家视角
+- 王若溪：`20260003`，适合演示买家视角、收藏、购物车与评价
+- 周可欣：`20260006`，适合演示待收货订单和批量下单
 
 ## 认证说明
 
