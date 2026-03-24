@@ -24,7 +24,7 @@ dist/
 htmlcov/
 
 # Local databases and runtime files
-*.db
+# *.db
 *.sqlite
 *.sqlite3
 *.log
